@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8085
 
 spring:
   application:
@@ -18,54 +18,29 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/auth/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: user-service
-                fallbackUri: forward:/fallback/user-service
 
         - id: user-service-api
           uri: lb://user-service
           predicates:
             - Path=/api/v1/users/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: user-service
-                fallbackUri: forward:/fallback/user-service
 
         # Property Service
         - id: property-service
           uri: lb://property-service
           predicates:
             - Path=/api/v1/properties/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: property-service
-                fallbackUri: forward:/fallback/property-service
 
         # Maintenance Service
         - id: maintenance-service
           uri: lb://maintenance-service
           predicates:
             - Path=/api/v1/maintenance-requests/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: maintenance-service
-                fallbackUri: forward:/fallback/maintenance-service
 
         # Notification Service
         - id: notification-service
           uri: lb://notification-service
           predicates:
             - Path=/api/v1/notifications/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: notification-service
-                fallbackUri: forward:/fallback/notification-service
 
 eureka:
   client:
