@@ -1,0 +1,38 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service-auth
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/auth/**
+
+        - id: user-service-api
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/api/v1/users/**
+
+        - id: property-service
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/api/v1/properties/**
+
+        - id: maintenance-service
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/api/v1/maintenance-requests/**
+
+        - id: notification-service
+          uri: http://localhost:${wiremock.server.port}
+          predicates:
+            - Path=/api/v1/notifications/**
+
+eureka:
+  client:
+    enabled: false
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
