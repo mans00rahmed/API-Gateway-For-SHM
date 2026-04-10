@@ -54,7 +54,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WireMock for integration tests -->
+        <!-- WireMock for integratio tests -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-contract-wiremock</artifactId>
