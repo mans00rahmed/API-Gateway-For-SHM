@@ -7,7 +7,7 @@ The API Gateway serves as the single entry point for all external client request
 ## Architecture
 
 ```
-Client  -->  API Gateway (port 8085)  -->  Eureka Server (port 8761)
+Client  -->  API Gateway (port 8086)  -->  Eureka Server (port 8761)
                   |                              |
                   +--- resolves service via ------+
                   |
@@ -21,11 +21,11 @@ Client  -->  API Gateway (port 8085)  -->  Eureka Server (port 8761)
 
 ### Gateway Port
 
-The gateway runs on **port 8085**, configured in `application.yml`:
+The gateway runs on **port 8086**, configured in `application.yml`:
 
 ```yaml
 server:
-  port: 8085
+  port: 8086
 ```
 
 ### Service Discovery Integration
@@ -131,7 +131,7 @@ These support Kubernetes-style liveness and readiness probes.
 ### Startup Order
 1. Discovery Service (port 8761)
 2. Backend services (User, Property, Maintenance, Notification)
-3. API Gateway (port 8085)
+3. API Gateway (port 8086)
 
 Allow ~30 seconds after starting backend services for them to register with Eureka before sending requests through the gateway.
 
@@ -139,12 +139,12 @@ Allow ~30 seconds after starting backend services for them to register with Eure
 
 ### Verify gateway is running
 ```
-GET http://localhost:8085/actuator/health
+GET http://localhost:8086/actuator/health
 ```
 
 ### Verify routing through gateway
 ```
-POST http://localhost:8085/auth/login
+POST http://localhost:8086/auth/login
 Content-Type: application/json
 
 {
