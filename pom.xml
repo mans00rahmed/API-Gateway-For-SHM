@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
+        <version>3.4.5</version>
         <relativePath/>
     </parent>
 
@@ -28,6 +28,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
+        
+        <dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+		</dependency>
 
         <!-- Eureka Client for service discovery -->
         <dependency>
@@ -54,7 +59,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WireMock for integration tests -->
+        <!-- WireMock for integratio tests -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-contract-wiremock</artifactId>

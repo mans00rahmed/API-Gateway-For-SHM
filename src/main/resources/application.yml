@@ -12,40 +12,60 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-
-        # User Service — auth and user endpoints
         - id: user-service-auth
           uri: lb://user-service
           predicates:
             - Path=/auth/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: userServiceAuthCircuitBreaker
+                fallbackUri: forward:/fallback/user-service
 
         - id: user-service-api
           uri: lb://user-service
           predicates:
             - Path=/api/v1/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: userServiceApiCircuitBreaker
+                fallbackUri: forward:/fallback/user-service
 
-        # Property Service
         - id: property-service
           uri: lb://property-service
           predicates:
             - Path=/api/v1/properties/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: propertyServiceCircuitBreaker
+                fallbackUri: forward:/fallback/property-service
 
-        # Maintenance Service
         - id: maintenance-service
           uri: lb://maintenance-service
           predicates:
             - Path=/api/v1/maintenance-requests/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: maintenanceServiceCircuitBreaker
+                fallbackUri: forward:/fallback/maintenance-service
 
-        # Notification Service
         - id: notification-service
           uri: lb://notification-service
           predicates:
             - Path=/api/v1/notifications/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: notificationServiceCircuitBreaker
+                fallbackUri: forward:/fallback/notification-service
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
 
