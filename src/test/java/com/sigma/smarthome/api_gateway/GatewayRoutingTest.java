@@ -1,6 +1,6 @@
 package com.sigma.smarthome.api_gateway;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
